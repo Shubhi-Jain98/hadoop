@@ -88,6 +88,12 @@ public abstract class ChecksumFileSystem extends FilterFileSystem {
       Preconditions.checkState(bytesPerChecksum > 0,
           "bytes per checksum should be positive but was %s",
           bytesPerChecksum);
+      int defaultBufferSize = conf.getInt(
+              LocalFileSystemConfigKeys.LOCAL_FS_STREAM_BUFFER_SIZE_KEY,
+              LocalFileSystemConfigKeys.LOCAL_FS_STREAM_BUFFER_SIZE_DEFAULT);
+      org.apache.hadoop.thirdparty.com.google.common.base.Preconditions.checkState(bytesPerChecksum <= defaultBufferSize,
+              "Must not be larger than %s but was %s ",
+              defaultBufferSize, bytesPerChecksum);
     }
   }
 

@@ -328,6 +328,10 @@ public class UserGroupInformation {
                 conf.get(HADOOP_KERBEROS_MIN_SECONDS_BEFORE_RELOGIN));
     }
 
+    if( kerberosMinSecondsBeforeRelogin < 0){
+      throw new IllegalArgumentException("Min time (in seconds) before relogin for Kerberos should be non-negative");
+    }
+
     kerberosKeyTabLoginRenewalEnabled = conf.getBoolean(
             HADOOP_KERBEROS_KEYTAB_LOGIN_AUTORENEWAL_ENABLED,
             HADOOP_KERBEROS_KEYTAB_LOGIN_AUTORENEWAL_ENABLED_DEFAULT);
