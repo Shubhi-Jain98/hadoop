@@ -440,7 +440,13 @@ public class RLESparseResourceAllocation {
       if (eB == null || eB.getValue() == null) {
         return null;
       }
-      if (op == RLEOperator.subtract) {
+      if (op == RLEOperator.subtract || op == RLEOperator.subtractTestNonNegative) {
+        if ( op == RLEOperator.subtractTestNonNegative && (Resources.fitsIn(Resources.negate(eB.getValue()), ZERO_RESOURCE)
+                && !Resources.equals(Resources.negate(eB.getValue()), ZERO_RESOURCE))) {
+          throw new PlanningException(
+                  "RLESparseResourceAllocation: merge failed as the "
+                          + "resulting RLESparseResourceAllocation would be negative");
+        }
         return Resources.negate(eB.getValue());
       } else {
         return eB.getValue();
