@@ -30,7 +30,6 @@ import org.apache.hadoop.yarn.api.records.Resource;
 import org.apache.hadoop.yarn.server.resourcemanager.reservation.exceptions.PlanningException;
 import org.apache.hadoop.yarn.util.resource.ResourceCalculator;
 import org.apache.hadoop.yarn.util.resource.Resources;
-
 /**
  * This is a run length encoded sparse data structure that maintains resource
  * allocations over time.
@@ -441,13 +440,16 @@ public class RLESparseResourceAllocation {
         return null;
       }
       if (op == RLEOperator.subtract || op == RLEOperator.subtractTestNonNegative) {
-        if ( op == RLEOperator.subtractTestNonNegative && (Resources.fitsIn(Resources.negate(eB.getValue()), ZERO_RESOURCE)
-                && !Resources.equals(Resources.negate(eB.getValue()), ZERO_RESOURCE))) {
+        Resource val = Resources.negate(eB.getValue());
+        // test for negative value and throws
+        if (op == RLEOperator.subtractTestNonNegative
+                && (Resources.fitsIn(val, ZERO_RESOURCE)
+                && !Resources.equals(val, ZERO_RESOURCE))) {
           throw new PlanningException(
                   "RLESparseResourceAllocation: merge failed as the "
                           + "resulting RLESparseResourceAllocation would be negative");
         }
-        return Resources.negate(eB.getValue());
+        return val;
       } else {
         return eB.getValue();
       }
