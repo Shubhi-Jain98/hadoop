@@ -17,6 +17,7 @@
  */
 package org.apache.hadoop.io.erasurecode;
 
+import org.apache.hadoop.HadoopIllegalArgumentException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.erasurecode.BufferAllocator.SimpleBufferAllocator;
 import org.apache.hadoop.io.erasurecode.BufferAllocator.SlicedBufferAllocator;
@@ -224,13 +225,23 @@ public abstract class TestCoderBase {
     int idx = 0;
 
     for (int i = 0; i < erasedDataIndexes.length; i++) {
-      toEraseChunks[idx ++] = dataChunks[erasedDataIndexes[i]];
-      dataChunks[erasedDataIndexes[i]] = null;
+      if(erasedDataIndexes[i] < dataChunks.length) {
+        toEraseChunks[idx++] = dataChunks[erasedDataIndexes[i]];
+        dataChunks[erasedDataIndexes[i]] = null;
+      } else {
+        throw new HadoopIllegalArgumentException(
+            "The erasedDataIndex " + i + " is out of bound");
+      }
     }
 
     for (int i = 0; i < erasedParityIndexes.length; i++) {
-      toEraseChunks[idx ++] = parityChunks[erasedParityIndexes[i]];
-      parityChunks[erasedParityIndexes[i]] = null;
+      if(erasedParityIndexes[i] < parityChunks.length) {
+        toEraseChunks[idx++] = parityChunks[erasedParityIndexes[i]];
+        parityChunks[erasedParityIndexes[i]] = null;
+      } else {
+        throw new HadoopIllegalArgumentException(
+            "The erasedParityIndex " + i + " is out of bound");
+      }
     }
 
     return toEraseChunks;

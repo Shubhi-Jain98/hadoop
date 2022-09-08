@@ -123,7 +123,11 @@ public class TestDecodingValidator extends TestRawCoderBase {
     }
 
     // decode
-    backupAndEraseChunks(clonedDataChunks, parityChunks);
+    try {
+      backupAndEraseChunks(clonedDataChunks, parityChunks);
+    } catch (Exception e) {
+      Assume.assumeNoException(e);
+    }
     ECChunk[] inputChunks =
         prepareInputChunksForDecoding(clonedDataChunks, parityChunks);
     markChunks(inputChunks);
@@ -210,7 +214,11 @@ public class TestDecodingValidator extends TestRawCoderBase {
     }
 
     // decode
-    backupAndEraseChunks(clonedDataChunks, parityChunks);
+    try {
+      backupAndEraseChunks(clonedDataChunks, parityChunks);
+    } catch (Exception e) {
+      Assume.assumeNoException(e);
+    }
     ECChunk[] inputChunks =
         prepareInputChunksForDecoding(clonedDataChunks, parityChunks);
     markChunks(inputChunks);
