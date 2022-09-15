@@ -225,22 +225,22 @@ public abstract class TestCoderBase {
     int idx = 0;
 
     for (int i = 0; i < erasedDataIndexes.length; i++) {
-      if(erasedDataIndexes[i] < dataChunks.length) {
-        toEraseChunks[idx++] = dataChunks[erasedDataIndexes[i]];
+      if (erasedDataIndexes[i] < dataChunks.length) {
+        toEraseChunks[idx ++] = dataChunks[erasedDataIndexes[i]];
         dataChunks[erasedDataIndexes[i]] = null;
       } else {
         throw new HadoopIllegalArgumentException(
-            "The erasedDataIndex " + i + " is out of bound");
+            "The erasedDataIndex " + erasedDataIndexes[i] + " is out of bound");
       }
     }
 
     for (int i = 0; i < erasedParityIndexes.length; i++) {
-      if(erasedParityIndexes[i] < parityChunks.length) {
-        toEraseChunks[idx++] = parityChunks[erasedParityIndexes[i]];
+      if (erasedParityIndexes[i] < parityChunks.length) {
+        toEraseChunks[idx ++] = parityChunks[erasedParityIndexes[i]];
         parityChunks[erasedParityIndexes[i]] = null;
       } else {
         throw new HadoopIllegalArgumentException(
-            "The erasedParityIndex " + i + " is out of bound");
+            "The erasedParityIndex " + erasedParityIndexes[i] + " is out of bound");
       }
     }
 
