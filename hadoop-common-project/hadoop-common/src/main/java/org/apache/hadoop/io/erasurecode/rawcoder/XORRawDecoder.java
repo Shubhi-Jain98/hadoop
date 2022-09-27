@@ -47,12 +47,12 @@ public class XORRawDecoder extends RawErasureDecoder {
     // Process the inputs.
     int iIdx, oIdx;
     for (int i = 0; i < decodingState.inputs.length; i++) {
-      // Skip the erased locations.
+      // Skip the erased location/s.
       if (Ints.asList(decodingState.erasedIndexes).contains(i)) {
         continue;
       }
       
-      // Skip the extra redundant items.
+      // Skip the extra redundant item/s.
       if (decodingState.inputs[i] == null) {
         continue;
       }
@@ -76,12 +76,12 @@ public class XORRawDecoder extends RawErasureDecoder {
     // Process the inputs.
     int iIdx, oIdx;
     for (int i = 0; i < decodingState.inputs.length; i++) {
-      // Skip the erased locations.
+      // Skip the erased location/s.
       if (Ints.asList(decodingState.erasedIndexes).contains(i)) {
         continue;
       }
       
-      // Skip the extra redundant items.
+      // Skip the extra redundant item/s.
       if (decodingState.inputs[i] == null) {
         continue;
       }
