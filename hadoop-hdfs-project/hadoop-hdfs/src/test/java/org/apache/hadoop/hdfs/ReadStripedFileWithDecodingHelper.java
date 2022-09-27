@@ -31,6 +31,7 @@ import org.apache.hadoop.hdfs.server.namenode.NameNode;
 import org.apache.hadoop.hdfs.util.StripedBlockUtil;
 import org.apache.hadoop.test.GenericTestUtils;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
@@ -200,10 +201,10 @@ abstract public class ReadStripedFileWithDecodingHelper {
         + ", parityBlkDelNum = " + parityBlkDelNum
         + ", deleteBlockFile? " + deleteBlockFile);
     int recoverBlkNum = dataBlkDelNum + parityBlkDelNum;
-    Assert.assertTrue("dataBlkDelNum and parityBlkDelNum should be positive",
+    Assume.assumeTrue("dataBlkDelNum and parityBlkDelNum should be positive",
         dataBlkDelNum >= 0 && parityBlkDelNum >= 0);
-    Assert.assertTrue("The sum of dataBlkDelNum and parityBlkDelNum " +
-        "should be between 1 ~ " + NUM_PARITY_UNITS, recoverBlkNum <=
+    Assume.assumeTrue("The sum of dataBlkDelNum and parityBlkDelNum " +
+        "should be between 1 ~ " + NUM_PARITY_UNITS, recoverBlkNum <= 
         NUM_PARITY_UNITS);
 
     // write a file with the length of writeLen
