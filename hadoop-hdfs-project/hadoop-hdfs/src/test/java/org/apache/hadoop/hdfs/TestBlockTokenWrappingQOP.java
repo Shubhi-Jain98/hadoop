@@ -37,6 +37,7 @@ import org.apache.hadoop.hdfs.protocol.datatransfer.sasl.SaslDataTransferTestCas
 import org.apache.hadoop.io.EnumSetWritable;
 import org.apache.hadoop.security.TestPermission;
 import org.junit.After;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -113,6 +114,17 @@ public class TestBlockTokenWrappingQOP extends SaslDataTransferTestCase {
   public void tearDown() throws Exception {
     if (cluster != null) {
       cluster.shutdown();
+    }
+  }
+  
+  @Before
+  public void testParameters() {
+    if (this.configKey == "privacy") {
+      Assume.assumeTrue(this.qopValue.equals("auth-conf"));
+    } else if (this.configKey == "integrity") {
+      Assume.assumeTrue(this.qopValue.equals("auth-int"));
+    } else if (this.configKey == "authentication") {
+      Assume.assumeTrue(this.qopValue.equals("auth"));
     }
   }
 
