@@ -29,6 +29,7 @@ import java.util.Set;
 
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -119,6 +120,14 @@ public class TestSystemMetricsPublisher {
     store = timelineServer.getTimelineStore();
 
     metricsPublisher = new TimelineServiceV1Publisher();
+    
+    boolean isTimeLineServerBatchEnabled = conf.getBoolean(
+        YarnConfiguration.RM_TIMELINE_SERVER_V1_PUBLISHER_BATCH_ENABLED,
+        YarnConfiguration.DEFAULT_RM_TIMELINE_SERVER_V1_PUBLISHER_BATCH_ENABLED);
+    int putEventInterval = conf.getInt(YarnConfiguration.RM_TIMELINE_SERVER_V1_PUBLISHER_INTERVAL,
+        YarnConfiguration.DEFAULT_RM_TIMELINE_SERVER_V1_PUBLISHER_INTERVAL);
+    Assume.assumeFalse(isTimeLineServerBatchEnabled && putEventInterval <= 0);
+    
     metricsPublisher.init(conf);
     metricsPublisher.start();
   }
