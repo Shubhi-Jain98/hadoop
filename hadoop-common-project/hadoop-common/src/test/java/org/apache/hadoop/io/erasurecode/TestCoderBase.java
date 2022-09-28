@@ -230,7 +230,8 @@ public abstract class TestCoderBase {
         dataChunks[erasedDataIndexes[i]] = null;
       } else {
         throw new HadoopIllegalArgumentException(
-            "The erasedDataIndex " + erasedDataIndexes[i] + " is out of bound");
+            "The erased index is out of bound: erasedDataIndex="
+                + erasedDataIndexes[i]);
       }
     }
 
@@ -240,7 +241,8 @@ public abstract class TestCoderBase {
         parityChunks[erasedParityIndexes[i]] = null;
       } else {
         throw new HadoopIllegalArgumentException(
-            "The erasedParityIndex " + erasedParityIndexes[i] + " is out of bound");
+            "The erased index is out of bound: erasedParityIndex="
+                + erasedParityIndexes[i]);
       }
     }
 
