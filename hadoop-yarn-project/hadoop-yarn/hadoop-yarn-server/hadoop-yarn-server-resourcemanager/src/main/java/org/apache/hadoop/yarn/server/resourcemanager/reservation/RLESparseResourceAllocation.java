@@ -440,7 +440,7 @@ public class RLESparseResourceAllocation {
       if (eB == null || eB.getValue() == null) {
         return null;
       }
-      if (op == RLEOperator.subtract 
+      if (op == RLEOperator.subtract
           || op == RLEOperator.subtractTestNonNegative) {
         Resource val = Resources.negate(eB.getValue());
         // test for negative value and throws

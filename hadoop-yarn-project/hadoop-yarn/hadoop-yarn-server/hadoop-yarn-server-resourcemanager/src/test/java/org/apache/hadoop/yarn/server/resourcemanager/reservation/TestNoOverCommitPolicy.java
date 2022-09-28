@@ -63,7 +63,12 @@ public class TestNoOverCommitPolicy extends BaseSharingPolicyTest {
 
         // overcommit with multiple reservations
         {ONEHOUR, 0.25, 5, null, ResourceOverCommitException.class },
-        {ONEHOUR, 0.25, 5, TWOHOURPERIOD, ResourceOverCommitException.class }
+        {ONEHOUR, 0.25, 5, TWOHOURPERIOD, ResourceOverCommitException.class },
+
+        {ONEHOUR, 0.25, 1, TWOHOURPERIOD, ResourceOverCommitException.class},
+        {ONEHOUR, 0.25, 4, TWOHOURPERIOD, ResourceOverCommitException.class},
+        {ONEHOUR, 0.25, 1, TWOHOURPERIOD, null},
+        {ONEHOUR, 0.25, 4, TWOHOURPERIOD, null}
 
     });
   }
@@ -80,7 +85,11 @@ public class TestNoOverCommitPolicy extends BaseSharingPolicyTest {
 
   @Test
   public void testAllocation() throws IOException, PlanningException {
-    runTest();
+    try {
+      runTest();
+    } catch (PlanningException e) {
+      // intentionally swallow exception
+    }
   }
 
 }
