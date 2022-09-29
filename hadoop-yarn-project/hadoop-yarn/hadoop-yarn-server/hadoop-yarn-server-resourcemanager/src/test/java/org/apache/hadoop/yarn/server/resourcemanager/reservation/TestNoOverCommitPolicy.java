@@ -80,11 +80,7 @@ public class TestNoOverCommitPolicy extends BaseSharingPolicyTest {
 
   @Test
   public void testAllocation() throws IOException, PlanningException {
-    try {
-      runTest();
-    } catch (PlanningException e) {
-      // intentionally swallow exception
-    }
+    runTest();
   }
 
 }
