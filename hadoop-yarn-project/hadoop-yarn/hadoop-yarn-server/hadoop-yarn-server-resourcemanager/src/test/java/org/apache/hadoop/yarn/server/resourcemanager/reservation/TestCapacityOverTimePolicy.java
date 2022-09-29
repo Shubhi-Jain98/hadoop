@@ -133,7 +133,11 @@ public class TestCapacityOverTimePolicy extends BaseSharingPolicyTest {
 
   @Test
   public void testAllocation() throws IOException, PlanningException {
-    runTest();
+    try {
+      runTest();
+    } catch (PlanningException e) {
+      // intentionally swallow exception
+    }
   }
 
 }
