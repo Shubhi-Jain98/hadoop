@@ -75,7 +75,6 @@ public class XORRawDecoder extends RawErasureDecoder {
     int dataLen = decodingState.decodeLength;
     CoderUtil.resetOutputBuffers(decodingState.outputs,
         decodingState.outputOffsets, dataLen);
-
     List<Integer> erasedIdxs = Ints.asList(decodingState.erasedIndexes);
 
     // Process the inputs.
