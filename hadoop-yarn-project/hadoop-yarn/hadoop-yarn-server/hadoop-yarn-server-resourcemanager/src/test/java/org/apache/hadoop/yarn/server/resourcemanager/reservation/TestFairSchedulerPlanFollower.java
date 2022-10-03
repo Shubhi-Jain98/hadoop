@@ -121,26 +121,14 @@ public class TestFairSchedulerPlanFollower extends
   public void testWithMoveOnExpiry() throws PlanningException,
       InterruptedException, AccessControlException {
     // invoke plan follower test with move
-    try {
-      testPlanFollower(true);
-    } catch (PlanningException p) {
-      String expected =  "RLESparseResourceAllocation: merge failed as the "
-          + "resulting RLESparseResourceAllocation would be negative";
-      assumeTrue(expected, !p.toString().contains(expected));
-    }
+    testPlanFollower(true);
   }
 
   @Test
   public void testWithKillOnExpiry() throws PlanningException,
       InterruptedException, AccessControlException {
     // invoke plan follower test with kill
-    try {
-      testPlanFollower(false);
-    } catch (PlanningException p) {
-      String expected =  "RLESparseResourceAllocation: merge failed as the "
-          + "resulting RLESparseResourceAllocation would be negative";
-      assumeTrue(expected, !p.toString().contains(expected));
-    }
+    testPlanFollower(false);
   }
 
   @Override
