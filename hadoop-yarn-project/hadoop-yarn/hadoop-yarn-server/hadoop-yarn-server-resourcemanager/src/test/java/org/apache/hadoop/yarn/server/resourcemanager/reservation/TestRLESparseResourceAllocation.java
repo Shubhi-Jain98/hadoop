@@ -34,7 +34,6 @@ import org.apache.hadoop.yarn.server.resourcemanager.reservation.RLESparseResour
 import org.apache.hadoop.yarn.server.resourcemanager.reservation.exceptions.PlanningException;
 import org.apache.hadoop.yarn.util.resource.DefaultResourceCalculator;
 import org.apache.hadoop.yarn.util.resource.ResourceCalculator;
-import org.apache.hadoop.yarn.util.resource.Resources;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
