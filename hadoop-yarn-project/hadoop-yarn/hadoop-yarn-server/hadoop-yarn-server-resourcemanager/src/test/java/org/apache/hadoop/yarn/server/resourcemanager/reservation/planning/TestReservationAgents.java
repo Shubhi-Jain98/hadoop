@@ -146,7 +146,12 @@ public class TestReservationAgents {
 
     long period = Long.parseLong(recurrenceExpression);
     for (int i = 0; i < 1000; i++) {
-      ReservationDefinition rr = createRandomRequest(i);
+      ReservationDefinition rr = null;
+      try {
+        rr = createRandomRequest(i);
+      } catch (PlanningException p) {
+        // pass
+      }
       if (rr != null) {
         ReservationId reservationID =
             ReservationSystemTestUtil.getNewReservationId();

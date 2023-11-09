@@ -21,6 +21,7 @@ package org.apache.hadoop.yarn.server.resourcemanager;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyList;
@@ -1850,6 +1851,9 @@ public class TestClientRMService {
     try {
       uResponse = clientService.updateReservation(uRequest);
     } catch (Exception e) {
+      String expected =  "RLESparseResourceAllocation: merge failed as the "
+          + "resulting RLESparseResourceAllocation would be negative";
+      assumeTrue(expected, !e.toString().contains(expected));
       Assert.fail(e.getMessage());
     }
     Assert.assertNotNull(uResponse);

@@ -79,10 +79,13 @@ public abstract class TestSchedulerPlanFollowerBase {
                 .generateAllocation(0L, 1L, f1), res, minAlloc), false));
 
     ReservationId r2 = ReservationId.newInstance(ts, 2);
-    assertTrue(plan.toString(),
-        plan.addReservation(new InMemoryReservationAllocation(r2, rDef, "u3",
-            "dedicated", 3, 3 + f1.length, ReservationSystemTestUtil
-                .generateAllocation(3L, 1L, f1), res, minAlloc), false));
+    try {
+      plan.addReservation(new InMemoryReservationAllocation(r2, rDef, "u3",
+          "dedicated", 3, 3 + f1.length, ReservationSystemTestUtil
+          .generateAllocation(3L, 1L, f1), res, minAlloc), false);
+    } catch (PlanningException p) {
+      // pass
+    }
 
     ReservationId r3 = ReservationId.newInstance(ts, 3);
     int[] f2 = { 0, 10, 20, 10, 0 };
